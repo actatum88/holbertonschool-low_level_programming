@@ -1,19 +1,17 @@
 #include <stdio.h>
-
 /**
- * main - Task 2 to play alphabet game
+ * main - Print alphabet in lowercase on one line
  *
- * Return: Always 0 (Success)
+ * Return: Always 0.
  */
-int main (void)
+int main(void)
 {
-  char x;
+	int c;
 
-  for (x = 'a' ; a <= 'z'; x++)
-    {
-      putchar(x);
-    }
-  putchar ('\n');
-
-  return (0);
+	for (c = 'a'; c < 'z' ; c++)
+	{
+		putchar(c);
+	}
+	putchar('\n');
+	return (0);
 }
