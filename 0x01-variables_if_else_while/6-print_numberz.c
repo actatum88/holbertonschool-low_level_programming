@@ -1,20 +1,19 @@
 #include <stdio.h>
 
 /**
- *
  * main - print numbers base 10 from 0
  *
  * Return: Always 0 (Success)
  */
 int main(void)
 {
-int x;
+	int x;
 
-for (x = '0'; x <= '9'; x++)
+	for (x = '0'; x <= '9'; x++)
 	{
 		putchar(x);
 	}
-putchar('\n');
+	putchar('\n');
 
 return (0);
 }
