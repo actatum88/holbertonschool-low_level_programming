@@ -1,0 +1,5 @@
+#include <stdlib.h>
+
+/**
+ * main - print alphabet in lowercase, and then in uppercase
+ *
