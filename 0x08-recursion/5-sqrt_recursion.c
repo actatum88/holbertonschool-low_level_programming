@@ -1,29 +1,42 @@
 #include "main.h"
-int squareroot(int n, int i);
+#include <stdio.h>
+
 /**
- * _sqrt_recursion - no loop, 1. 2nd function - checks for perfect square
- * @n: input
- * Return: Always 0 (Success)
+ *isqrt_rec - Doing the real work
+ *
+ *@n: integer being rooted by 2
+ *@k: guess for square root value
+ *
+ * Return: int
  */
+
+int isqrt_rec(long k, int n)
+{
+	long next_k = (k + n / k) / 2;
+
+	if (k * k == n)
+	{
+		return (k);
+	} else if (k * k < n && (k + 1) * (k + 1) > n)
+	{
+		return (-1);
+	}
+	return (isqrt_rec(next_k, n));
+}
+
+/**
+ *_sqrt_recursion - Task 4
+ *isqrt_rec - passes n and a starting point of 1 to above
+ *@n: value to be rooted
+ * Return: int
+ */
+
 int _sqrt_recursion(int n)
 {
 	if (n < 0)
+	{
 		return (-1);
-	else
-		return (squareroot(n, (n + 1) / 2));
-}
-/**
- * squareroot - checks if perfect square
- * @n: input
- * @i: counter
- * Return: if square root
- */
-int squareroot(int n, int i)
-{
-	if (i < 1)
-		return (-1);
-	else if (i * i == n)
-		return (i);
-	else
-		return (squareroot(n, i - 1));
+	}
+
+	return (isqrt_rec(1, n));
 }
