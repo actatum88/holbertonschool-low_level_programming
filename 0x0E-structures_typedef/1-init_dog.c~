@@ -1,0 +1,19 @@
+#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+
+/**
+* init_dog - initialize a variable of type struct dog
+* @size: size of array
+* @c: character
+*
+* Return: NULL if array write fails or size is 0, else array
+*/
+
+void init_dog(struct dog *d, char *name, float age, char *owner)
+
+d->name;
+d->age;
+d->owner;
+
+printf("Name: %s\n", d->name)
