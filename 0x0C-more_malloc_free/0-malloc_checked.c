@@ -1,15 +1,18 @@
-#include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
-
+#include <stdio.h>
+#include "main.h"
 /**
-* malloc_checked - allocate memory using malloc
-* @size: size of array
-* @c: character
-*
-* Return: NULL if array write fails or size is 0, else array
-*/
-
+ * malloc_checked - Entry Point
+ * @b: input amount
+ * Return: pointer to new mem
+ */
 void *malloc_checked(unsigned int b)
 {
-	
+	void *n;
+
+	n = malloc(b);
+
+	if (n == NULL)
+		exit(98);
+	return (n);
+}
