@@ -1,57 +1,45 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 /**
-* create_array - creates an array of chars
-* @size: size of array
-* @c: character
-*
-* Return: NULL if array write fails or size is 0, else array
-*/
-/**
- * string_nconcat - len of 1st str, len of 2nd str, if n < 2nd, 2nd = n
- * 2nd + 1st = total len, malloc + null byte, loop to insert into temp arr
- * @s1: input one
- * @s2: input two
- * @n: s2's number of bytes
- * Return: 0
+ * string_nconcat - concatenates two strings, up to N characters
+ * @s1: string to be appended
+ * @s2: string which IS appended
+ * @n: number of chars to append from s2
+ * Return: new string generated
  */
+
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
-	char *arr;
-	unsigned int i, j, co, co_2;
+	unsigned int i = 0, j = 0;
+	char *newstr, *junk;
 
-	if (s1 == NULL)
+	if (!s1)
 		s1 = "";
-	if (s2 == NULL)
+	for (; s1[i] != '\0' ; i++)
+	{
+	}
+
+	if (!s2)
 		s2 = "";
-
-	for (i = 0; s1[i] != '\0'; i++)
+	for (; (s2[j] != '\0') && j < n ; j++)
 	{
 	}
 
-	for (j = 0; s2[j] != '\0'; j++)
-	{
-	}
+	newstr = malloc((i + j + 1) * sizeof(char));
 
-	if (n < j)
-		j = n;
-
-	j += i;
-	arr = malloc(sizeof(char *) * (j + 1));
-
-	if (arr == NULL)
+	if (!newstr)
 		return (NULL);
 
-	for (co = 0; co < i; co++)
-		arr[co] = s1[co];
-	for (co_2 = 0; co < j; co_2++)
-	{
-		arr[co] = s2[co_2];
-		co++;
-	}
-	co++;
-	arr[co] = '\0';
-	return (arr);
+	for (i = 0 ; s1[i] != '\0' ; i++)
+		newstr[i] = s1[i];
+	for (j = 0 ; (s2[j] != '\0') && (j < n) ; j++)
+		newstr[i + j] = s2[j];
+
+	newstr[i + j] = '\0';
+
+	junk = malloc(5);
+	free(junk);
+
+	return (newstr);
 }
