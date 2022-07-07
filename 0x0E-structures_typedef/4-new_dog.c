@@ -1,53 +1,56 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "dog.h"
-int get_len(int i);
-char *str_cpy(char *dest, char *src);
+#include <stdlib.h>
+#include <string.h>
+
 /**
- * new_dog - a function that creates a new dog
- * get len of name + owner, malloc them, cpy name + owner to new
- * @name: name
- * @age: age
- * @owner: owner
- * Return: 0
+ * new_dog - manually builds a dog struct and error-checks it
+ * @name: name of dog
+ * @age: age of dog
+ * @owner: owner of dog
+ * Return: newdog pointer; NULL on failures
+ *
  */
+
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *new_name;
-	char *copy_name, *copy_owner;
-	unsigned int x, name_len = 0, owner_len = 0;
+	dog_t *newdog = malloc(sizeof(*newdog));
+	char *name_cpy, *owner_cpy;
+	unsigned int i;
 
-	new_name = malloc(sizeof(dog_t));
-	if (name == NULL)
-		return (NULL);
-	if (name == NULL || age <= 0 || owner == NULL)
+	if (!newdog)
 	{
-		free(new_name);
+		free(newdog);
 		return (NULL);
 	}
 
-	for (x = 0; name[x] != '\0'; x++)
-		name_len++;
-
-	for (x = 0; owner[x] != '\0'; x++)
-		owner_len++;
-
-	copy_name = malloc(sizeof(char) * (name_len + 1));
-	if (copy_name == NULL)
+	if (!name || age != age || !owner)
+	{
+		free(newdog);
 		return (NULL);
+	}
 
-	copy_owner = malloc(sizeof(char) * (owner_len + 1));
-	if (copy_owner == NULL)
+	name_cpy = malloc((strlen(name) + 1) * sizeof(*name_cpy));
+	owner_cpy = malloc((strlen(owner) + 1) * sizeof(*owner_cpy));
+
+	if (!name_cpy || !owner_cpy)
+	{
+		free(name_cpy);
+		free(owner_cpy);
+		free(newdog);
 		return (NULL);
+	}
 
-	for (x = 0; x <= name_len; x++)
-		copy_name[x] = name[x];
+	for (i = 0 ; i < strlen(name) ; i++)
+		name_cpy[i] = name[i];
+	name_cpy[i] = '\0';
 
-	for (x = 0; x <= owner_len; x++)
-		copy_owner[x] = owner[x];
+	for (i = 0 ; i < strlen(owner) ; i++)
+		owner_cpy[i] = owner[i];
+	owner_cpy[i] = '\0';
 
-	new_name->name = copy_name;
-	new_name->owner = copy_owner;
-	new_name->age = age;
-	return (new_name);
+	newdog->name = name_cpy;
+	newdog->age = age;
+	newdog->owner = owner_cpy;
+
+	return (newdog);
 }
