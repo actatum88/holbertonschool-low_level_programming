@@ -8,10 +8,12 @@
 
 size_t list_len(const list_t *h)
 {
-	int n;
-	const list_t *tmp;
+	size_t i = 0;
 
-	countlinkedlist();
-
-	return (n);
+	while (h != NULL)
+	{
+		h = h->next;
+		i++;
+	}
+	return (i);
 }
