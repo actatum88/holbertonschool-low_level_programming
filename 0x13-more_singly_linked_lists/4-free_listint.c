@@ -5,15 +5,14 @@
  * @head: pointer to the head of list
  * Return: void
  */
-
 void free_listint(listint_t *head)
 {
-	listint_t *top = head;
+	listint_t *temp;
 
 	while (head != NULL)
-		{
-		       top = head->next;
-		       free(head);
-		       head = top;
-		}
+	{
+		temp = head->next;
+		free(head);
+		head = temp;
+	}
 }
