@@ -8,31 +8,35 @@
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	int file, rd, wr;
-	char *buf;
 
-	if (filename == NULL)
+	int file_descriptor;
+	int read_it;
+	int write_it;
+	char *buffer = malloc(letters);
+
+	if (buffer == NULL || filename == NULL)
 		return (0);
-	file = popen(filename, O_RDONLY);
-
-	if (file == -1)
+	file_descriptor = open(filename, O_RDONLY);
+	if (file_descriptor < 0)
+	{
+		free(buffer);
 		return (0);
-
-	buf = malloc(sizeof(char) * letters + 1);
-	if (buf == NULL)
+	}
+	read_it = read(file_descriptor, buffer, letters);
+	if (read_it < 0)
+	{
+		free(buffer);
+		close(file_descriptor);
 		return (0);
-
-	rd = fread(file, buf, letters);
-	if (rd == -1)
+	}
+	write_it = write(STDOUT_FILENO, buffer, read_it);
+	if (write_it < 0)
+	{
+		free(buffer);
+		close(file_descriptor);
 		return (0);
-
-	buf[letters] = '\0';
-
-	wr = fwrite(1, buf, rd);
-	if (wr == -1)
-		return (0);
-
-	pclose(file);
-	free(buf);
-	return (wr);
+	}
+	close(file_descriptor);
+	free(buffer);
+	return (write_it);
 }
