@@ -1,7 +1,5 @@
-#include "holberton.h"
+#include "main.h"
 #include <stdarg.h>
-int print_exit(int exit_number, char *filename, int fd);
-
 /**
  * main - copies the content of one file to another file
  * @argc: number of arguments passed
@@ -16,19 +14,19 @@ int main(int argc, char *argv[])
 	char buffer[1024];
 
 	if (argc != 3)
-		exit(print_exit(97, NULL, 0));
+		exit(on_exit(97, NULL, 0));
 	if (!argv[1])
-		exit(print_exit(98, argv[1], 0));
+		exit(on_exit(98, argv[1], 0));
 	file_from = open(argv[1], O_RDONLY);
 	if (file_from < 0)
-		exit(print_exit(98, argv[1], file_from));
+		exit(on_exit(98, argv[1], file_from));
 	file_to = open(argv[2], O_CREAT | O_TRUNC | O_WRONLY, 0664);
 	if (file_to < 0)
 	{
 		file_close = close(file_from);
 		if (file_close != 0)
 			exit(print_exit(100, argv[1], file_from));
-		exit(print_exit(99, argv[2], file_to));
+		exit(on_exit(99, argv[2], file_to));
 	}
 	while ((file_read = read(file_from, buffer, 1024)) && file_read > 0
 			&& file_write >= 0)
